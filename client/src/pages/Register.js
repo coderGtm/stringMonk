@@ -19,6 +19,7 @@ function Register() {
         e.preventDefault();
         try {
             const res = await axios.post('/api/users/register', formData);
+            console.log("Register response token:", res.data.token);  // Add this line to debug
             login(res.data.token);
         } catch (err) {
             console.error(err.response.data);

@@ -18,6 +18,7 @@ function Login() {
         e.preventDefault();
         try {
             const res = await axios.post('/api/users/login', formData);
+            console.log("Login response token:", res.data.token);  // Add this line to debug
             login(res.data.token);
         } catch (err) {
             console.error(err.response.data);

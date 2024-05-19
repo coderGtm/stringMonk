@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/users');
-const { registerUser } = require('./controllers/userController');
+const workspaceRoutes = require('./routes/workspaces');
+const stringRoutes = require('./routes/strings');
+
 
 dotenv.config();
 
@@ -22,6 +24,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRoutes);
+app.use('/api/workspaces', workspaceRoutes);
+app.use('/api/strings', stringRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
