@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 function Login() {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+
+    const { login } = useContext(AuthContext);
 
     const { email, password } = formData;
 
@@ -15,7 +18,7 @@ function Login() {
         e.preventDefault();
         try {
             const res = await axios.post('/api/users/login', formData);
-            console.log(res.data);
+            login(res.data.token);
         } catch (err) {
             console.error(err.response.data);
         }
