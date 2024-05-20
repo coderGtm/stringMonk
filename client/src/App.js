@@ -8,6 +8,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Workspaces from './pages/Workspaces';
 import Strings from './pages/Strings';
 import ContributionRequest from './pages/ContributionRequest';
+import AdminDashboard from './pages/AdminDashboard';
 
 
 function App() {
@@ -46,6 +47,14 @@ function App() {
                     element={
                         <PrivateRoute>
                             <ContributionRequest />
+                        </PrivateRoute>
+                    } 
+                />
+                <Route 
+                    path="/workspaces/:workspaceId/admin-dashboard" 
+                    element={
+                        <PrivateRoute>
+                            <AdminDashboard />
                         </PrivateRoute>
                     } 
                 />

@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const Workspace = require('../models/Workspace');
 const String = require('../models/String');
+const xml = require('xml');
 
 // Add a new string
 router.post('/', auth, async (req, res) => {
@@ -33,6 +34,29 @@ router.get('/:workspaceId', auth, async (req, res) => {
     try {
         const strings = await String.find({ workspace: req.params.workspaceId });
         res.json(strings);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// Download strings.xml
+router.get('/:workspaceId/download', auth, async (req, res) => {
+    try {
+        const strings = await String.find({ workspace: req.params.workspaceId });
+
+        const xmlStrings = strings.map(string => ({
+            string: [
+                { _attr: { name: string.key } },
+                string.value
+            ]
+        }));
+
+        const xmlData = xml({ resources: xmlStrings }, { declaration: true });
+
+        res.setHeader('Content-Disposition', 'attachment; filename="strings.xml"');
+        res.setHeader('Content-Type', 'application/xml');
+        res.send(xmlData);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
