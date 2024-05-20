@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/users');
 const workspaceRoutes = require('./routes/workspaces');
 const stringRoutes = require('./routes/strings');
+const contributionRequestRoutes = require('./routes/contributionRequests');
 
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/api/workspaces', workspaceRoutes);
 app.use('/api/strings', stringRoutes);
+app.use('/api/contribution-requests', contributionRequestRoutes);
 
 
 const PORT = process.env.PORT || 5000;

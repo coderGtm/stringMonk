@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 import Workspaces from './pages/Workspaces';
 import Strings from './pages/Strings';
+import ContributionRequest from './pages/ContributionRequest';
 
 
 function App() {
@@ -37,6 +38,14 @@ function App() {
                     element={
                         <PrivateRoute>
                             <Strings />
+                        </PrivateRoute>
+                    } 
+                />
+                <Route 
+                    path="/workspaces/:workspaceId/contribution-requests" 
+                    element={
+                        <PrivateRoute>
+                            <ContributionRequest />
                         </PrivateRoute>
                     } 
                 />
